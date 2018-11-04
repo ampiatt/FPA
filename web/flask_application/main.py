@@ -6,11 +6,6 @@ import json
 
 webApp = Flask(__name__)
 
-client = MongoClient()
-db = client.fpa
-list_stocks = [stock for stock in db.stocks.find({})]
-dates = [datetime.datetime.strptime(item['date'], '%Y-%m-%d') for item in list_stocks]
-prices = [item['adj_close'] for item in list_stocks]
 
 
 @webApp.route('/setup')
@@ -18,11 +13,14 @@ def setup():
     stock_file = pandas.read_csv("DJIA_table.csv")
     article_file = pandas.read_csv("RedditNews.csv")
 
+    client = MongoClient()
+    db = client.fpa
+
     stock_json = json.loads(stock_file.to_json(orient="records"))
     article_json = json.loads(article_file.to_json(orient="records"))
 
-    delete = db.stocks.delete_many({})
-    delete = db.articles.delete_many({})
+    db.stocks.delete_many({})
+    db.articles.delete_many({})
 
     db.articles.insert(article_json)
     db.stocks.insert(stock_json)
@@ -33,6 +31,9 @@ def homepage():
     client = MongoClient()
     db = client.fpa
 
+    list_stocks = [stock for stock in db.stocks.find({})]
+    dates = [datetime.datetime.strptime(item['date'], '%Y-%m-%d') for item in list_stocks]
+    prices = [item['adj_close'] for item in list_stocks]
     list_articles = [article for article in db.articles.find({})]
     stock_prices = [item['adj_close'] for item in list_stocks]
 
@@ -47,6 +48,12 @@ def homepage():
 
 @webApp.route('/stocks')
 def stocks():
+    client = MongoClient()
+    db = client.fpa
+    list_stocks = [stock for stock in db.stocks.find({})]
+    dates = [datetime.datetime.strptime(item['date'], '%Y-%m-%d') for item in list_stocks]
+    prices = [item['adj_close'] for item in list_stocks]
+
     cut_dates = dates[:10]
     cut_prices = prices[:10]
     most_recent_price = round(cut_prices[0], 2)
