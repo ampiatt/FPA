@@ -38,8 +38,15 @@
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
                                 datasets: [{ 
                                         data: {{ cut_prices | safe }},
-                                        label: "Africa",
+                                        label: "stock_line",
                                         borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: {{ cut_predicted | safe }},
+                                        label: "prediction_line",
+                                        borderColor: "#3e95cd",
+                                        borderDash: [10,5],
                                         fill: false
                                     }
                                 ]
@@ -63,10 +70,17 @@
                             data: {
                                 //labels: {{ cut_dates | safe }},
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
-                                datasets: [{ 
+                               datasets: [{ 
                                         data: {{ cut_prices | safe }},
-                                        label: "Africa",
+                                        label: "stock_line",
                                         borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: {{ cut_predicted | safe }},
+                                        label: "prediction_line",
+                                        borderColor: "#3e95cd",
+                                        borderDash: [10,5],
                                         fill: false
                                     }
                                 ]
@@ -93,8 +107,15 @@
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
                                 datasets: [{ 
                                         data: {{ cut_prices | safe }},
-                                        label: "Africa",
+                                        label: "stock_line",
                                         borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: {{ cut_predicted | safe }},
+                                        label: "prediction_line",
+                                        borderColor: "#3e95cd",
+                                        borderDash: [10,5],
                                         fill: false
                                     }
                                 ]
@@ -119,8 +140,15 @@
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
                                 datasets: [{ 
                                         data: {{ cut_prices | safe }},
-                                        label: "Africa",
+                                        label: "stock_line",
                                         borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: {{ cut_predicted | safe }},
+                                        label: "prediction_line",
+                                        borderColor: "#3e95cd",
+                                        borderDash: [10,5],
                                         fill: false
                                     }
                                 ]
@@ -147,8 +175,15 @@
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
                                 datasets: [{ 
                                         data: {{ cut_prices | safe }},
-                                        label: "Africa",
+                                        label: "stock_line",
                                         borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: {{ cut_predicted | safe }},
+                                        label: "prediction_line",
+                                        borderColor: "#3e95cd",
+                                        borderDash: [10,5],
                                         fill: false
                                     }
                                 ]
@@ -173,8 +208,15 @@
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
                                 datasets: [{ 
                                         data: {{ cut_prices | safe }},
-                                        label: "Africa",
+                                        label: "stock_line",
                                         borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: {{ cut_predicted | safe }},
+                                        label: "prediction_line",
+                                        borderColor: "#3e95cd",
+                                        borderDash: [10,5],
                                         fill: false
                                     }
                                 ]

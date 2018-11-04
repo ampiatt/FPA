@@ -42,9 +42,11 @@ def homepage():
 
     cut_stock_prices = stock_prices[:6]
     cut_article_titles = article_titles[:6]
+    cut_predicted = [17200, 17100, 17300, 17500, 17400, 17600, 17800]
+    print(cut_stock_prices)
+    print(cut_predicted)
 
-
-    return render_template("homepage.html", Headlines = cut_article_titles, cut_prices = cut_stock_prices)
+    return render_template("homepage.html", Headlines = cut_article_titles, cut_prices = cut_stock_prices, cut_predicted = cut_predicted)
 
 @webApp.route('/stocks')
 def stocks():
