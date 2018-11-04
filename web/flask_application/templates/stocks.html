@@ -10,10 +10,10 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">FPA</a></li>
+                    <a class="navbar-brand" href="/setup">FPA</a></li>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
+                    <li><a href="/home">Home</a></li>
                     <li><a href="/feeds">Feeds</a></li>
                     <li class="active"><a href="/stocks">Stocks</a></li>
                 </ul>
@@ -40,18 +40,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>APL</td>
-                        <td>Apple</td>
-                        <td>$123</td>
-                        <td><div class="card"><canvas id="line-chart1" class="chartjs-render-monitor" width="100px" height="50px"></canvas></div>
+                        <td>DJIA</td>
+                        <td>Dow Jones Industrial Average</td>
+                        <td>$ {{ most_recent_price }}</td>
+                        <td><div class="card"><canvas id="line-chart1" class="chartjs-render-monitor" width="100px" height="300px"></canvas></div>
                         <script>
                         var chart1 =  new Chart(document.getElementById("line-chart1"), {
                             type: 'line',
                             data: {
-                                //labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                                //labels: {{ cut_dates | safe }},
                                 labels: ["", "", "", "", "", "", "", "", "", ""],
                                 datasets: [{ 
-                                        data: [86,114,106,106,107,111,133,221,783,2478],
+                                        data: {{ cut_prices | safe }},
                                         label: "Africa",
                                         borderColor: "#3e95cd",
                                         fill: false
