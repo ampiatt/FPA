@@ -10,16 +10,16 @@ import datetime
 
 class Model:
     stock_hist = 10
-    vocabulary_size = 1000
+    vocabulary_size = 500
     embedding_size = 10
     batch_size = 5
     num_hidden = 5
     num_classes = 2
-    padded_length = 50
+    padded_length = 100
     filter_sizes = [3, 4, 5]
     num_filters = 128
     hidden_count = 384
-    epoch_count = 1000
+    epoch_count = 1500
 
     def __init__(self):
 
@@ -182,20 +182,20 @@ class Model:
         return news, stocks, out
 
     def get_learning_rate(self, epoch):
-        return 0.99 ** float(epoch + 1)
+        return 0.995 ** float(epoch + 1)
 
     def train(self):
         # load the data
         inputs = self.get_news_data()
         self.process_sentences(inputs)
         self.get_stock_data(inputs)
-        selection = random.sample(inputs.keys(), 1500)
         # open the session
         with tf.Session() as session:
             session.run(tf.global_variables_initializer())
             # run the training
-            news, stocks, out = self.get_data(inputs, selection)
             for i in range(self.epoch_count):
+                selection = random.sample(inputs.keys(), 200)
+                news, stocks, out = self.get_data(inputs, selection)
                 _, error = session.run([self.minimize, self.loss], {self.news_input: news, self.stock_input: stocks, self.price_output: out, self.learning_rate: self.get_learning_rate(i)})
                 print('Epoch: {}, error: {}'.format(i, error))
             # predict everything
