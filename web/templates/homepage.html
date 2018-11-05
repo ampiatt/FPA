@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">FPA</a></li>
+                </div>
+            </div>
+        </nav>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <h3>DJIA</h3>
+            <p>The solid blue line represents the actual stock price on a given day.</p>
+            <p>The dashed red line represents the predicted stock price on a given day, given the previous ten days stock price and the top 25 headlines.</p>
+            <p>The graph may be hard to see, so a raw csv of the data can be downloaded here: <a href="/csv">raw_csv</a></p>
+            <div class="row" height="740px">
+                <div style="overflow-x: scroll;">
+                <div style="width: 30000px">
+                <canvas id="line-chart1" width="30000px" height="740px"></canvas>
+                <script>
+                var chart1 =  new Chart(document.getElementById("line-chart1"), {
+                    type: 'line',
+                    data: {
+                        labels: {{ labels | safe }},
+                        datasets: [{ 
+                                data: {{ prices | safe }},
+                                label: "actual",
+                                borderColor: "#3e95cd",
+                                fill: false
+                            },
+                            {
+                                data: {{ predictions | safe }},
+                                label: "predicted",
+                                borderColor: "#FF0000",
+                                borderDash: [10,5],
+                                fill: false
+                            }
+                        ]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scaleShowLabels: true,
+                        legend: { display: false }
+                    }
+                });
+                </script>
+                </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
